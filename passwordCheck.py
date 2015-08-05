@@ -9,6 +9,10 @@ import re
 
 #Author: Nicholas Swiatecki <nicholas@swiatecki.com>
 
+# TODO
+# 1) Change online lookups of ID -> hostname from "online" to "offline" 
+#	Would optimize runtime a lot
+
 def passwordChecker():
 	# CALLS: reachability-info
 	# Takes a list of switches as input for lookup
@@ -21,29 +25,30 @@ def passwordChecker():
 	reach =  host_json["response"]
 
 
-	items = []
+	result = {"name":"Password Complexity Check","totalScore":0,"items":[]}
 
 	for d in reach:
 		# Only analyze passwords which actually could login
 		if d["reachabilityStatus"].lower() == "success":
 
 			hostname = getDeviceByIDOnline(d["id"])["hostname"]
+			#hostname = getDeviceByIDOffline(d["id"])["hostname"]
 			if not hostname:
 				# No hostname available, break
 				continue
 
-			decode = str(base64.b64decode(d["password"]))
+			decoded = base64.b64decode(d["password"]).decode()
 			#Empty item
 			item ={"id":"","comment":"","score":0}
 
 			item["id"] = hostname
 
-			item["comment"] = "Username:"+ d["userName"] +"(Password: " + decode + ")"
+			item["comment"] = "Username: "+ d["userName"] +" (Password: " + decoded + ")"
 
 			# Lets look at the password first
 			# We want a password that has: 2 uppercase, one special, 2 numbers, minimum 8 i total
 			# Regex is magic
-			if(re.match(r'^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$',decode)):
+			if(re.match(r'^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$',decoded)):
 				item["comment"]+= "# Strength: Good"
 				item["core"] = 10
 			else:
@@ -57,7 +62,7 @@ def passwordChecker():
 				decodeEn = str(base64.b64decode(d["enablePassword"]))
 				#print ("(Enable password: " + decodeEn + ")" )
 
-				if(re.match(r'^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$',decode)):
+				if(re.match(r'^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$',decodeEn)):
 					item["comment"]+= "# Enable Strength: Good"
 					item["score"]+= 6
 				else:
@@ -66,8 +71,8 @@ def passwordChecker():
 			
 
 
-			items.append(item)		
+			result["items"].append(item)		
 		else:
 			pass 
 			# Not reachable
-	return items
+	return result

@@ -3,16 +3,11 @@ import requests
 import json
 import traceback
 
+devices = []
+
 def getDeviceByIDOffline(id):
-	deviceURL = baseUrl + "network-device"
-	url = deviceURL + "/"+id
-	response = requests.get(url, verify=False)
-	if response.status_code == requests.codes.ok:
-		hjson = response.json()
-		parent =  hjson["response"]
-		return parent
-	else:
-		return None
+	#todo
+	pass
 
 def getDeviceByIDOnline(id):
 	deviceURL = baseURL + "network-device"
