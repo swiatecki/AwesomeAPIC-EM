@@ -50,7 +50,7 @@ def passwordChecker():
 			# Regex is magic
 			if(re.match(r'^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$',decoded)):
 				item["comment"]+= "# Strength: Good"
-				item["core"] = 10
+				item["score"] = 10
 			else:
 				item["comment"]+= "# Strength: Sucks"
 				item["score"] = 4
