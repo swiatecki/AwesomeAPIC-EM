@@ -1,6 +1,7 @@
 from utils import *
 import requests
 import passwordCheck
+import reportBuilder
 requests.packages.urllib3.disable_warnings() #Fix request's warnings
 
 
@@ -13,7 +14,16 @@ if __name__ == "__main__":
 	devices = getAllNetworkDevices()
 	#print(devices)
 
-	passwordItems = passwordCheck.passwordChecker()
-	print(json.dumps(passwordItems,indent=4,separators=(',', ': ')))
+	scans = []
 
+	# Add scans below here
+	scans.append(passwordCheck.passwordChecker())
+	scans.append(passwordCheck.passwordChecker())
+	# Don't edit below this! 
+	print(json.dumps(scans[0],indent=4,separators=(',', ': ')))
+	report = reportBuilder.build(scans)
+
+	f = open("report.html","w")
+	f.write(report)
+	f.close()
 

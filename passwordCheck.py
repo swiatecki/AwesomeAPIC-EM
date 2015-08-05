@@ -26,7 +26,7 @@ def passwordChecker():
 
 
 	result = {"name":"Password Complexity Check","totalScore":0,"items":[]}
-
+	sumScore=[]
 	for d in reach:
 		# Only analyze passwords which actually could login
 		if d["reachabilityStatus"].lower() == "success":
@@ -52,7 +52,7 @@ def passwordChecker():
 				item["comment"]+= "# Strength: Good"
 				item["score"] = 10
 			else:
-				item["comment"]+= "# Strength: Sucks"
+				item["comment"]+= "# Strength: <b>Sucks</b>"
 				item["score"] = 4
 
 
@@ -69,10 +69,15 @@ def passwordChecker():
 					item["comment"]+= "# Enable Strength: Sucks"
 					item["score"]+=-3 #Note this is -= as it is negative
 			
-
-
+			sumScore.append(item["score"])
 			result["items"].append(item)		
+
+			# calculate the avg. of the scores
+
+			
+
 		else:
 			pass 
 			# Not reachable
+	result["totalScore"] = sum(sumScore)/float(len(sumScore))		
 	return result
