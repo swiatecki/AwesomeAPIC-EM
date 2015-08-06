@@ -2,6 +2,7 @@ from utils import *
 import requests
 import passwordCheck
 import reportBuilder
+import EOLchecker
 import settings
 import os
 requests.packages.urllib3.disable_warnings() #Fix request's warnings
@@ -20,7 +21,7 @@ if __name__ == "__main__":
 
 	# Add scans below here
 	scans.append(passwordCheck.passwordChecker())
-	
+	scans.append(EOLchecker.DOFchecker())
 	# Don't edit below this! 
 	#print(json.dumps(scans[0],indent=4,separators=(',', ': ')))
 
@@ -30,6 +31,6 @@ if __name__ == "__main__":
 	f.write(report)
 	f.close()
 
-	print("****** Success! Report in: " + settings.reportFileName)
+	print("****** DiCK!  Success! Report in: " + settings.reportFileName)
 
 	os.startfile(settings.reportFileName)
