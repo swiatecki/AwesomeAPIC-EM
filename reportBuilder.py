@@ -1,3 +1,4 @@
+#Author: Nicholas Swiatecki <nicholas@swiatecki.com>
 def build(scans):
 	head = '<html><head><title>BPA Report</title></head>'
 	style = (
@@ -14,7 +15,7 @@ def build(scans):
 
 		body+= "<div>\
 		<div><h2>"+s["name"]+", Score: "+str(s["totalScore"])+"</h2></div>"+\
-		"<table style='width:100%'><thead><tr><th>Name</th><th>Comment</th><th>Sub-Score</th></tr></thead>"
+		"<table style='width:100%'><thead><tr><th>Item</th><th>Comment</th><th>Sub-Score</th></tr></thead>"
 
 		body+="<tbody>"
 		for i in s["items"]:
