@@ -2,9 +2,9 @@ from utils import *
 import requests
 import passwordCheck
 import reportBuilder
-import EOLchecker
 import settings
 import os
+import shRunCheck
 requests.packages.urllib3.disable_warnings() #Fix request's warnings
 
 #Author: Nicholas Swiatecki <nicholas@swiatecki.com>
@@ -21,7 +21,9 @@ if __name__ == "__main__":
 
 	# Add scans below here
 	scans.append(passwordCheck.passwordChecker())
-	scans.append(EOLchecker.DOFchecker())
+	scans.append(shRunCheck.shRunChecker())
+	
+#	scans.append(DOFchecker.DOFchecker())
 	# Don't edit below this! 
 	#print(json.dumps(scans[0],indent=4,separators=(',', ': ')))
 
