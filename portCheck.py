@@ -54,6 +54,7 @@ def portSpeedCheck():
     #Calculating usagerate
     usagerate = round(total/(total+totaldown), 3)
     usage = "The usagerate is <b>" + str(round((usagerate*100),1)) + " %</b>"
+    scoreUsage = round(usagerate * 10)
 
     #creating comments for match-analysis
     matchlen = total-len(noMatch)
@@ -63,11 +64,12 @@ def portSpeedCheck():
     #Calculating the scores
     scoreMatch = round(((total-len(noMatch))*10/total),2)
     scoreMisM = round((len(noMatch)*1/total),2)
-    totalS = round((((total-len(noMatch))*10+len(noMatch)*1)/(total)),2)
+    scoreMatchMisM = round(((total-len(noMatch))*10+len(noMatch)*1)/(total),2)
+    totalS = 0.8 * scoreMatchMisM + 0.2 * scoreUsage
 
-    items = [{'id':'Usage rate', 'comment':usage, 'score':usagerate},
-             {'id':'Match', 'comment':match, 'score':scoreMatch},
-             {'id':'Mismatch', 'comment':nomatch, 'score':scoreMisM}
+    items = [{'id':'Usage rate', 'comment':usage, 'score':scoreUsage},
+             {'id':'Match', 'comment':match, 'score':round(scoreMatch)},
+             {'id':'Mismatch', 'comment':nomatch, 'score':round(scoreMisM)}
              ]
     #If there is mismatches:
     if len(noMatch) != 0:
@@ -82,10 +84,6 @@ def portSpeedCheck():
         items.append(noMatchLine)
         
     #Final format:
-    d = {'name': 'Port Speed Check', 'totalScore': totalS, 'items': items}
+    d = {'name': 'Port Speed Check', 'totalScore': round(totalS, 1), 'items': items}
 
     return d
-
-
-d = portSpeedCheck()
-print(d)

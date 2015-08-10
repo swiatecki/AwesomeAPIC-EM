@@ -28,10 +28,9 @@ if __name__ == "__main__":
 	scans.append(shRunCheck.shRunChecker())
 	#scans.append(DOFchecker.DOFchecker())
 	scans.append(portCheck.portSpeedCheck())
-	scans.append(versionCheck.versionChecker())
+#	scans.append(versionCheck.versionChecker())
 	
-	
-#	scans.append(DOFchecker.DOFchecker())
+
 	# Don't edit below this! 
 	#print(json.dumps(scans[0],indent=4,separators=(',', ': ')))
 
