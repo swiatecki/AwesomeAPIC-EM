@@ -5,6 +5,10 @@ import reportBuilder
 import settings
 import os
 import shRunCheck
+#import DOFchecker
+import portCheck
+import versionCheck
+
 requests.packages.urllib3.disable_warnings() #Fix request's warnings
 
 #Author: Nicholas Swiatecki <nicholas@swiatecki.com>
@@ -22,6 +26,10 @@ if __name__ == "__main__":
 	# Add scans below here
 	scans.append(passwordCheck.passwordChecker())
 	scans.append(shRunCheck.shRunChecker())
+	#scans.append(DOFchecker.DOFchecker())
+	scans.append(portCheck.portSpeedCheck())
+	scans.append(versionCheck.versionChecker())
+	
 	
 #	scans.append(DOFchecker.DOFchecker())
 	# Don't edit below this! 
