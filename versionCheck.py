@@ -84,7 +84,8 @@ def versionChecker():
 					switches[i]["software_duplicates_older"]=switches[i]["software_duplicates_older"]+1
 					switches[j]["software_duplicates_newer"]=switches[j]["software_duplicates_newer"]+1
 
-	result = {"name":"Software Version Checker","totalScore":0,"items":[]}
+	result = {"name":"Software Version Checker","totalScore":0,"items":[],"description":""}
+	result["description"] = "Analyses software versions of devices on the network. If multiple devices of the same family are in the network, their software version will be compared."
 
 
 	#print("\n\nSWITCHES:")

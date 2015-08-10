@@ -2,6 +2,8 @@ from statistics import mean
 import mattstev
 #Author: Nicholas Swiatecki <nicholas@swiatecki.com>
 def build(scans):
+	finalScore = extractFinalScore(scans)
+
 	head = '<html><head><title>BPA Report</title></head>'
 	style = (
 			"<style>"
@@ -11,7 +13,7 @@ def build(scans):
 			)
 
 	body = "<body><h1>Best Practice Analyser v. 0.1</h1>"
-	body += "<h2 style='color: orange;text-decoration:underline;'>Total Score "+str(extractFinalScore(scans))+"</h2>"
+	body += "<h2 style='color: orange;text-decoration:underline;'>Total Score "+str(finalScore)+renderMatt(finalScore)+"</h2>"
 
 	for s in scans:
 		#Get header and write it
@@ -49,4 +51,14 @@ def extractFinalScore(scans):
 	#List comprehension <3 
 	l = [s["totalScore"] for s in scans]
 	return round(mean(l),1)
+
+def renderMatt(score):
+	if score <= 4:
+		return mattstev.mad()
+	elif score > 4 and score <= 7:
+		return mattstev.meh()
+	elif score > 7:
+		return mattstev.happy()
+
+
 	
