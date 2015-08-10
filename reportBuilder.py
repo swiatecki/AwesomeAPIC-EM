@@ -17,8 +17,12 @@ def build(scans):
 		#Get header and write it
 
 		body+= "<div>\
-		<div><h2>"+s["name"]+", Score: "+str(s["totalScore"])+"</h2></div>"+\
-		"<table style='width:100%'><thead><tr><th>Item</th><th>Comment</th><th>Sub-Score</th></tr></thead>"
+		<div><h2>"+s["name"]+", Score: "+str(s["totalScore"])+"</h2></div>"
+
+		if "description" in s:
+			body+="<p style='font-style:italic'>"+s["description"]+"</p>"
+
+		body+="<table style='width:100%'><thead><tr><th>Item</th><th>Comment</th><th>Sub-Score</th></tr></thead>"
 
 		body+="<tbody>"
 		for i in s["items"]:

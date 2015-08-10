@@ -26,7 +26,10 @@ def passwordChecker():
 	reach =  host_json["response"]
 
 
-	result = {"name":"Password Complexity Check","totalScore":0,"items":[]}
+	result = {"name":"Password Complexity Check","totalScore":0,"items":[],"description":""}
+
+	result["description"] = "Analyses the password and enable password complexity."
+
 	sumScore=[] # for calculating the total score
 	hostsChecked=[]# temp for storing the hosts already in the list
 	for d in reach:
