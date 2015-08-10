@@ -1,17 +1,17 @@
+#Author: Nicholas Swiatecki <nicholas@swiatecki.com>
 from utils import *
 import requests
-import passwordCheck
+requests.packages.urllib3.disable_warnings() #Fix request's warnings
 import reportBuilder
 import settings
 import os
+
+""" Import your Modules below """
+import passwordCheck
 import shRunCheck
-#import DOFchecker
+import DOFchecker
 import portCheck
 import versionCheck
-
-requests.packages.urllib3.disable_warnings() #Fix request's warnings
-
-#Author: Nicholas Swiatecki <nicholas@swiatecki.com>
 
 
 if __name__ == "__main__":
@@ -21,20 +21,15 @@ if __name__ == "__main__":
 
 	devices = getAllNetworkDevices()
 
-	#print(devices)
-
 	scans = [] # To store the results in
 
 	# Add scans below here
 	
 	scans.append(passwordCheck.passwordChecker())
-	
 	scans.append(shRunCheck.shRunChecker())
-	#scans.append(DOFchecker.DOFchecker())
-
+	scans.append(DOFchecker.DOFchecker())
 	scans.append(portCheck.portSpeedCheck())
-
-#	scans.append(versionCheck.versionChecker())
+	scans.append(versionCheck.versionChecker())
 	
 	
 	"""Don't edit below this!  """
@@ -49,4 +44,5 @@ if __name__ == "__main__":
 
 	print("****** DiCK!  Success! Report in: " + settings.reportFileName)
 
+	# Launch a webbrowser with the newly generated report
 	os.startfile(settings.reportFileName)
