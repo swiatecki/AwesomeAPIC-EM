@@ -69,7 +69,7 @@ def portSpeedCheck():
 
     items = [{'id':'Usage rate', 'comment':usage, 'score':scoreUsage},
              {'id':'Match', 'comment':match, 'score':round(scoreMatch)},
-             {'id':'Mismatch', 'comment':nomatch, 'score':round(scoreMisM)}
+             {'id':'Mismatch', 'comment':nomatch, 'score':(10-round(scoreMisM))}
              ]
     #If there is mismatches:
     if len(noMatch) != 0:
@@ -84,6 +84,11 @@ def portSpeedCheck():
         items.append(noMatchLine)
         
     #Final format:
-    d = {'name': 'Port Speed Check', 'totalScore': round(totalS, 1), 'items': items}
+    desc = "Analyzes, how well the ports are utilized. The usagerate calculates the " +\
+                  "amount of ports that are down and creates an usage rate percentage for it. " +\
+                  "Match and Mismatch analyzes, how many ports' negotiated speed is actually the " +\
+                  "speed of the port, and in how many cases the port's speed is not fully utilized."
+
+    d = {'name': 'Port Speed Check', 'totalScore': round(totalS, 1), 'items': items,"description":desc}
 
     return d

@@ -1,4 +1,4 @@
-#Author: Nicholas Swiatecki <nicholas@swiatecki.com>
+#Author: Nicholas Swiatecki <nicholas@swiatecki.com> // <nswiatec@cisco.com>
 from utils import *
 import requests
 requests.packages.urllib3.disable_warnings() #Fix request's warnings
@@ -42,7 +42,7 @@ if __name__ == "__main__":
 	f.write(report)
 	f.close()
 
-	print("****** DiCK!  Success! Report in: " + settings.reportFileName)
+	print("****** Done! Success! Report generated in: " + settings.reportFileName)
 
 	# Launch a webbrowser with the newly generated report
 	os.startfile(settings.reportFileName)

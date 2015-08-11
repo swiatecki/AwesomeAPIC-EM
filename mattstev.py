@@ -1,7 +1,7 @@
 #Contains images
 
 imgStart = "<img src='data:image/png;base64,"
-imgEnd = "'/>"
+imgEnd = "' class=\"matt\" />"
 
 # Happy
 def happy():

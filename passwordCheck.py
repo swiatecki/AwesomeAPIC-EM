@@ -28,7 +28,7 @@ def passwordChecker():
 
 	result = {"name":"Password Complexity Check","totalScore":0,"items":[],"description":""}
 
-	result["description"] = "Analyses the password and enable password complexity."
+	result["description"] = "Analyses the password and enable password complexity. A perfect password would inlude 'XXxx12&'"
 
 	sumScore=[] # for calculating the total score
 	hostsChecked=[]# temp for storing the hosts already in the list
@@ -58,7 +58,7 @@ def passwordChecker():
 				item["comment"]+= ", Strength: <span style='color:green;'>Good</span>"
 				item["score"] = 10
 			else:
-				item["comment"]+= ", Strength: <span style='color:red;'>Sucks</span>"
+				item["comment"]+= ", Strength: <span style='color:red;'>Weak</span>"
 				item["score"] = 4
 
 
@@ -72,7 +72,7 @@ def passwordChecker():
 					item["comment"]+= ", Enable PW: "+decodeEn+" Strength: <span style='color:green;'>Good</span>"
 					item["score"]+= 6
 				else:
-					item["comment"]+= ", Enable PW: "+decodeEn+" Strength: <span style='color:red;'>Sucks</span>"
+					item["comment"]+= ", Enable PW: "+decodeEn+" Strength: <span style='color:red;'>Weak</span>"
 					item["score"]+=-3 #Note this is -= as it is negative
 			else:
 				print("Hmm, the enablePassword hash is:" + d["enablePassword"])

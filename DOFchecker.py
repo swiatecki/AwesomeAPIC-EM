@@ -10,29 +10,12 @@ from settings import*
 requests.packages.urllib3.disable_warnings() #Fix request's warnings
 
 def DOFchecker():
-	result = {"name":"Date of Fabrication","totalScore":0,"items":[]}
+	result = {"name":"Date of Fabrication","totalScore":0,"items":[],"description":"Calls the /network-device API and extracts the fabrication date of devices on the network from their serial number."}
 
 	interfaceURL = baseURL + "network-device"
 	interfaceResponse = requests.get(interfaceURL, verify=False).json()
 	parent = interfaceResponse["response"]
 
-	'''# All of our REST calls will use the url for the APIC EM Controller as the base URL
-	# So lets define a variable for the controller IP or DNS so we don't have to keep typing it
-	controller_url = "https://173.38.218.164"
-
-	# Get Devices
-	# This function allows you to view a list of all the devices in the network(routers and switches).
-	get_devices_url = controller_url + '/api/v0/network-device/'
-
-	# Perform GET on get_devices_url
-	get_devices_response = requests.get(get_devices_url, verify=False)
-
-	# The json method of the response object returned by requests.get returns the request body in json format
-	get_devices_json = get_devices_response.json()
-
-	# Now let's read and display some specific information from the json
-	# set our parent as the top level response object
-	parent =  get_devices_json["response"]'''
 
 	itemlist = [] #list of serial Numbers
 	idlist = [] 
@@ -112,12 +95,12 @@ def DOFchecker():
 
 		line["id"] = utils.getDeviceByIDOnline(idlist[m])["hostname"]
 		line["comment"] = StrYear[m] + ", " + MonthsABC[m] 	
-		line ["score"] = score[m]	+ "/10"														
+		line ["score"] = score[m]	#+ "/10"														
 
 		result["items"].append(line)
 		y += int(score[m])
 		z = round(y/11 , 3)
-		result["totalScore"] = z
+		result["totalScore"] = round(z,1)
 
 
 		#("ID = " + item["id"] + ", Serial Number = " + itemlist[m] + ", Date of Fabrication = " + StrYear[m] + ", " + MonthsABC[m])

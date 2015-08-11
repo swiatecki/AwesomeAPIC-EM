@@ -26,7 +26,7 @@ def shRunChecker():
 	configs =  host_json["response"]
 
 
-	result = {"name":"Config Checker","totalScore":0,"items":[]}
+	result = {"name":"Config Checker","totalScore":0,"items":[],"description":"Analyses the output of the /network-device/config API and checks for running telnet, HTTP and HTTPS servers"}
 	sumScore=[] # for calculating the total score
 	hostsChecked=[]# temp for storing the hosts already in the list
 
@@ -50,12 +50,14 @@ def shRunChecker():
 
 			#Look for telnet! 
 
+			item["score"]=5
+
 			if "transport input telnet" in d["runningConfig"]:
-				item["comment"] = "Telnet <span style='color:red'>sucks</span>."
-				item["score"]+=4
+				item["comment"] = "Telnet <span style='color:red'>found</span>."
+				item["score"]+= -2
 			else:
 				if "transport input" in d["runningConfig"]:
-					item["score"]+=4
+					item["score"]+= -2
 					item["comment"] = "<span style='color:red'>'<pre style='display:inline'>transport input</pre>'' not specified</span>"
 
 			# !!! TODO: Add scoring
