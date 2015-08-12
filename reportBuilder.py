@@ -11,7 +11,7 @@ def build(scans):
                         "div.h1 {width:100%; height:300px; background-color:#2B2B2B; position:absolute; left:0px; top:0px;}"
                         "h1{color:#28CDC1;text-transform: uppercase;font-family: Arial, Helvetica, sans-serif}"
                         "h2{text-transform: uppercase;font-family: Arial, Helvetica, sans-serif}"
-                        "table{background-color:#ffffff; border:0px; border-spacing:0px; width:100%;}"
+                        "table{font-family: Arial, Helvetica, sans-serif; background-color:#ffffff; border:0px; border-spacing:0px; width:100%;}"
                         "th {text-align:left;background-color:#2B2B2B; border-bottom:2px solid #28CDC1; color:#e9e9e9;"
                         "font-size:14px; text-transform: uppercase; font-weight:normal; padding:5px;}"
                         "td {padding:7px;} td.item {width:30%;} td.comment {width:60%;} td.score {width:10%;}"
@@ -83,6 +83,9 @@ def extractFinalScore(scans):
 	#List comprehension <3 
 	l = [s["totalScore"] for s in scans]
 	return round(mean(l),1)
+	#return round(10)
+
+
 
 def renderMatt(score):
 	if score <= 4:
