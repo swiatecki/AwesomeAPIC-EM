@@ -82,8 +82,8 @@ def build(scans):
 def extractFinalScore(scans):
 	#List comprehension <3 
 	l = [s["totalScore"] for s in scans]
-	return round(mean(l),1)
-	#return round(10)
+	#return round(mean(l),1)
+	return round(2)
 
 
 
